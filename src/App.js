@@ -3,6 +3,7 @@ import './style/app.scss';
 import Song from './components/Song';
 import Player from './components/Player';
 import Library from './components/Library';
+import Nav from './components/Nav';
 import data from './data';
 
 
@@ -38,7 +39,7 @@ function App() {
     <div className="App">
      <Song currentSong={currentSong}/>
      <Player currentSong={currentSong} isPlayingNow={isPlayingNow} setIsPlayingNow={setIsPlayingNow} audioRef={audioRef} songInfo={songInfo} setSongInfo={setSongInfo}/>
-     <Library songs={songs} setCurrentSong={setCurrentSong}/>
+     <Library songs={songs} setCurrentSong={setCurrentSong} audioRef={audioRef} isPlayingNow={isPlayingNow} setSongs={setSongs}/>
      <audio onTimeUpdate={updateTimeHandle} onLoadedMetadata={updateTimeHandle} ref={audioRef} src={currentSong.audio}></audio>
     </div>
   );
