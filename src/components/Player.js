@@ -1,6 +1,11 @@
 import React,{useRef,useState} from 'react';
+// import font awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import icons from font awesome
 import {faPlay, faAngleLeft,faAngleRight,faPause} from '@fortawesome/free-solid-svg-icons';
+
+    // change status playing && play && pause music
+
 const Player = ({currentSong,isPlayingNow,setIsPlayingNow}) => {
     //ref
     const audioRef= useRef(null);
@@ -35,11 +40,18 @@ const Player = ({currentSong,isPlayingNow,setIsPlayingNow}) => {
         )
     }
 
+    // drag,move song forward and back using mouse
+
+    const dragInputValue = e =>{
+        setSongInfo({...songInfo,currentTime: e.target.value})
+        audioRef.current.currentTime=e.target.value;
+    }
+
     return ( 
         <div className="player-container">
             <div className="time-control">
                 <p>{getTimeInSeconds(songInfo.currentTime)}</p>
-                <input type="range"/>
+                <input type="range" min={0} max={songInfo.duration} value={songInfo.currentTime} onChange={dragInputValue}/>
                 <p>{getTimeInSeconds(songInfo.duration)}</p>
             </div>
             <div className="play-control">
@@ -47,7 +59,7 @@ const Player = ({currentSong,isPlayingNow,setIsPlayingNow}) => {
                 <FontAwesomeIcon onClick={playSongHandle} className="play" icon={isPlayingNow?faPause:faPlay} size="2x"/>
                 <FontAwesomeIcon className="skip-forward" icon={faAngleRight} size="2x"/>
             </div>
-            <audio onTimeUpdate={updateTimeHandle} ref={audioRef} src={currentSong.audio}></audio>
+            <audio onTimeUpdate={updateTimeHandle} onLoadedMetadata={updateTimeHandle} ref={audioRef} src={currentSong.audio}></audio>
         </div>
      );
 }
