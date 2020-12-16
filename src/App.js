@@ -34,8 +34,13 @@ function App() {
         currentTime,
         duration,
     })
-
-    
+  
+}
+  // The music continues until the user stops it
+const autoPlayHandle = () =>{
+  if(isPlayingNow){
+    audioRef.current.play();
+  }
 }
 
 
@@ -45,7 +50,7 @@ function App() {
      <Song currentSong={currentSong}/>
      <Player currentSong={currentSong} isPlayingNow={isPlayingNow} setIsPlayingNow={setIsPlayingNow} audioRef={audioRef} songInfo={songInfo} setSongInfo={setSongInfo} setCurrentSong={setCurrentSong} songs={songs} setSongs={setSongs}/>
      <Library songs={songs} setCurrentSong={setCurrentSong} audioRef={audioRef} isPlayingNow={isPlayingNow} setSongs={setSongs} isNavActive={isNavActive}/>
-     <audio onTimeUpdate={updateTimeHandle} onLoadedMetadata={updateTimeHandle} ref={audioRef} src={currentSong.audio}></audio>
+     <audio onLoadedData={autoPlayHandle} onTimeUpdate={updateTimeHandle} onLoadedMetadata={updateTimeHandle} ref={audioRef} src={currentSong.audio}></audio>
     </div>
   );
 }

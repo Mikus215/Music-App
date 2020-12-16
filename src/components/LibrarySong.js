@@ -6,14 +6,6 @@ const LibrarySong = ({song,setCurrentSong,songs,audioRef,isPlayingNow,setSongs})
     const setCurrentSongHandle = () =>{
         const selectedSong=songs.filter(item => item.id === song.id)
         setCurrentSong(selectedSong[0])
-        if(isPlayingNow){
-        const playPromise=audioRef.current.play()
-            if(playPromise!==undefined){
-                playPromise.then(audio=>{
-                    audioRef.current.play();
-                })
-            }
-        }
     }
         // change background // change state active
     const isSelectedSong = () =>{
@@ -26,7 +18,6 @@ const LibrarySong = ({song,setCurrentSong,songs,audioRef,isPlayingNow,setSongs})
             })
         )
     }
-    
     
 
     return ( 
