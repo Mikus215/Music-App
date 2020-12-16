@@ -1,8 +1,21 @@
 import React from 'react';
-const Nav = () => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faMusic} from '@fortawesome/free-solid-svg-icons';
+
+const Nav = ({isNavActive,setIsNavActive}) => {
+
+    // change this active-library in library.scss // Nav show and hide
+    const activeNavHandle = () =>{
+        setIsNavActive(!isNavActive)
+    }
+
     return ( 
         <div className="nav">
-            <h2>qwe</h2>
+            <h1>Waves</h1>
+            <button onClick={activeNavHandle}>
+                Library
+                <FontAwesomeIcon icon={faMusic}/>
+            </button>
         </div>
      );
 }
