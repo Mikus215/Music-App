@@ -43,14 +43,22 @@ const autoPlayHandle = () =>{
   }
 }
 
+// auto skip
+
+const nextMusicHandle= async ()=>{
+  let index=songs.findIndex(song=>song.id===currentSong.id)
+await setCurrentSong(songs[(index+1)%songs.length])
+if(isPlayingNow) audioRef.current.play();
+}
+
 
   return (
-    <div className="App">
+    <div className={`App ${isNavActive ? 'library-active' : ''}`}>
      <Nav isNavActive={isNavActive} setIsNavActive={setIsNavActive}/>
      <Song currentSong={currentSong}/>
      <Player currentSong={currentSong} isPlayingNow={isPlayingNow} setIsPlayingNow={setIsPlayingNow} audioRef={audioRef} songInfo={songInfo} setSongInfo={setSongInfo} setCurrentSong={setCurrentSong} songs={songs} setSongs={setSongs}/>
      <Library songs={songs} setCurrentSong={setCurrentSong} audioRef={audioRef} isPlayingNow={isPlayingNow} setSongs={setSongs} isNavActive={isNavActive}/>
-     <audio onLoadedData={autoPlayHandle} onTimeUpdate={updateTimeHandle} onLoadedMetadata={updateTimeHandle} ref={audioRef} src={currentSong.audio}></audio>
+     <audio onEnded={nextMusicHandle} onLoadedData={autoPlayHandle} onTimeUpdate={updateTimeHandle} onLoadedMetadata={updateTimeHandle} ref={audioRef} src={currentSong.audio}></audio>
     </div>
   );
 }

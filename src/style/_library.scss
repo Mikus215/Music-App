@@ -8,6 +8,7 @@
     overflow: scroll;
     transform: translateX(-100%);
     opacity: 0;
+    background-color: white;
     transition: transform .5s ease,opacity .5s ease;
     h2{
         padding: 2rem;
@@ -17,6 +18,7 @@
     display: flex;
     padding: 1rem 2rem;
     cursor: pointer;
+    transition: background-color .3s;
     img{
        width: 20%; 
     }
@@ -56,4 +58,9 @@
 .active-library{
     transform: translateX(0%);
     opacity: 1;
+}
+@media screen and (max-width: 768px){
+    .library{
+        width: 100%;
+    }
 }
